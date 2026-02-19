@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +16,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // 1. Crear el Administrador Principal
+        User::create([
+            'name' => 'Roberto Lozano Acosta',
+            'email' => 'admin@test.com',
+            'password' => Hash::make('admin123'), 
+            'role' => 'admin',
+            'points' => 0, 
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // 2. Crear un Usuario Normal (Jugador) para pruebas
+        User::create([
+            'name' => 'Jugador Prueba',
+            'email' => 'jugador@test.com',
+            'password' => Hash::make('jugador123'),
+            'role' => 'player',
+            'points' => 500, // 500 puntos iniciales para el canje
         ]);
     }
 }
