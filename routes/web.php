@@ -15,9 +15,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/users/{user}/points', [AdminController::class, 'addPoints'])->name('admin.add_points');
     
+    // User Management CRUD
+    Route::post('/users', [AdminController::class, 'storeUser'])->name('admin.users.store');
+    Route::put('/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+
     // Rewards Management
     Route::get('/rewards', [AdminController::class, 'rewardsIndex'])->name('admin.rewards.index');
     Route::post('/rewards', [AdminController::class, 'storeReward'])->name('admin.rewards.store');
+    Route::put('/rewards/{reward}', [AdminController::class, 'updateReward'])->name('admin.rewards.update');
     Route::delete('/rewards/{reward}', [AdminController::class, 'destroyReward'])->name('admin.rewards.destroy');
 });
 

@@ -30,10 +30,12 @@
                         <div class="hidden md:block ml-10 space-x-4">
                             @if(auth()->user()->role === 'admin')
                                 <a href="{{ route('admin.dashboard') }}" class="text-gray-300 hover:bg-gaming-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('admin.dashboard') ? 'bg-gaming-700 text-white' : '' }}">Usuarios</a>
-                                <a href="#" class="text-gray-300 hover:bg-gaming-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Premios</a>
+                                
+                                <a href="{{ route('admin.rewards.index') }}" class="text-gray-300 hover:bg-gaming-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('admin.rewards.index') ? 'bg-gaming-700 text-white' : '' }}">Premios</a>
                             @else
                                 <a href="{{ route('rewards.catalog') }}" class="text-gray-300 hover:bg-gaming-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('rewards.catalog') ? 'bg-gaming-700 text-white' : '' }}">Catálogo</a>
-                                <a href="#" class="text-gray-300 hover:bg-gaming-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Mis Premios</a>
+                                
+                                <a href="{{ route('user.inventory') }}" class="text-gray-300 hover:bg-gaming-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('user.inventory') ? 'bg-gaming-700 text-white' : '' }}">Mis Premios</a>
                             @endif
                         </div>
                     @endauth
@@ -75,12 +77,82 @@
         @yield('content')
     </main>
 
-    <footer class="bg-gaming-800 border-t border-gaming-700 mt-auto">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-gray-400 text-sm">
-                &copy; {{ date('Y') }} GamePortal. Todos los derechos reservados.
-            </p>
-        </div>
-    </footer>
-</body>
-</html>
+        <footer class="bg-gaming-800 border-t border-gaming-700 mt-auto">
+
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+
+                <p class="text-center text-gray-400 text-sm">
+
+                    &copy; {{ date('Y') }} GamePortal. Todos los derechos reservados.
+
+                </p>
+
+            </div>
+
+        </footer>
+
+    
+
+        @if(session('reward_purchased'))
+
+            <div id="toast-notification" class="fixed bottom-5 right-5 z-50 bg-gaming-800 border-l-4 border-green-500 p-6 rounded shadow-2xl max-w-sm transform transition-all duration-500 ease-in-out">
+
+                <div class="flex items-start">
+
+                    <div class="flex-shrink-0">
+
+                        <span class="text-3xl">🎉</span>
+
+                    </div>
+
+                    <div class="ml-3">
+
+                        <h3 class="text-lg font-bold text-white">¡Canje Exitoso!</h3>
+
+                        <p class="text-sm text-gray-300 mt-1">Has adquirido: <span class="font-bold text-green-400">{{ session('reward_purchased')->name }}</span></p>
+
+                        <p class="text-xs text-gray-400 mt-1">Coste: {{ session('reward_purchased')->point_cost }} Puntos</p>
+
+                        <a href="{{ route('user.inventory') }}" class="mt-3 inline-block bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm font-medium transition">
+
+                            Ver en mi Inventario
+
+                        </a>
+
+                    </div>
+
+                    <button onclick="document.getElementById('toast-notification').classList.add('hidden')" class="ml-auto text-gray-400 hover:text-white">
+
+                        &times;
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <script>
+
+                setTimeout(function() {
+
+                    const toast = document.getElementById('toast-notification');
+
+                    if(toast) {
+
+                        toast.style.opacity = '0';
+
+                        setTimeout(() => toast.classList.add('hidden'), 500);
+
+                    }
+
+                }, 6000);
+
+            </script>
+
+        @endif
+
+    </body>
+
+    </html>
+
+    

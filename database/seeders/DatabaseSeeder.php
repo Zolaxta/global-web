@@ -33,5 +33,9 @@ class DatabaseSeeder extends Seeder
             'role' => 'player',
             'points' => 500, // 500 puntos iniciales para el canje
         ]);
+        
+        $this->call([
+            RewardSeeder::class,
+        ]);
     }
 }

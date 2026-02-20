@@ -1,6 +1,8 @@
-<x-app-layout>
-    <x-slot:title>Mis Premios</x-slot>
+@extends('layouts.app')
 
+@section('title', 'Mis Premios')
+
+@section('content')
     <div class="mb-8 text-center">
         <h1 class="text-4xl font-extrabold text-white mb-2">Mi <span class="text-gaming-600">Inventario</span></h1>
         <p class="text-gray-400">Objetos canjeados y fecha de adquisición</p>
@@ -37,4 +39,4 @@
             @endforeach
         </div>
     @endif
-</x-app-layout>
+@endsection

@@ -1,6 +1,8 @@
-<x-app-layout>
-    <x-slot:title>Catálogo de Recompensas</x-slot>
+@extends('layouts.app')
 
+@section('title', 'Catálogo de Recompensas')
+
+@section('content')
     <div class="mb-8 text-center">
         <h1 class="text-4xl font-extrabold text-white mb-2">Catálogo de <span class="text-gaming-600">Recompensas</span></h1>
         <p class="text-gray-400">Canjea tus puntos por contenido exclusivo</p>
@@ -40,4 +42,4 @@
         </div>
         @endforeach
     </div>
-</x-app-layout>
+@endsection

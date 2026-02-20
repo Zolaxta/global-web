@@ -89,7 +89,7 @@ class RewardController extends Controller
         // Record transaction
         $user->rewards()->attach($reward->id, ['paid_amount' => $reward->point_cost]);
 
-        // Return SSR notification view
-        return view('rewards.notification', ['reward' => $reward]);
+        // Redirect back with flash session for Toast notification
+        return redirect()->route('rewards.catalog')->with('reward_purchased', $reward);
     }
 }
